@@ -1,28 +1,9 @@
 from geometry import *
-from graphics import *
+from graphics_tk import *
 
 to_screen = [1, 0, 0, 0, -1, 0]
-lw_scale = 1
 tiles = 0
 level = 0
-
-scale_centre = 0
-scale_start = 0
-scale_ts = 0
-
-reset_button = 0
-subst_button = 0
-translate_button = 0
-scale_button = 0
-draw_hats = 0
-draw_super = 0
-radio = 0
-
-dragging = False
-uibox = True
-box_height = 10
-
-svg_serial = 0
 
 cols = {'H1':"grey", 'H':'light blue', 'T':"blue", 'P':"light grey", 'F':"White"}
 
@@ -268,7 +249,7 @@ def setup():
     while True:
         draw()
         draw_tiles(vertices_to_draw, width=1000, height=1000)
-        level += 1
+        #level += 1
         build_supertiles()
 
 setup()
