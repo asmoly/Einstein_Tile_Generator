@@ -1,9 +1,5 @@
 from math import cos, sin, pi
 
-r3 = 1.7320508075688772
-hr3 = 0.8660254037844386
-ident = [1, 0, 0, 0, 1, 0]
-
 class Vector:
     def __init__(self, x, y):
         self.x = x
@@ -12,63 +8,65 @@ class Vector:
     def __str__(self):
         return f"({self.x}, {self.y})"
 
-def pt(x, y):
-    return Vector(x, y)
+y_axis_in_hex = Vector(0.5, 0.8660254037844386)
+identity = [1, 0, 0, 0, 1, 0]
 
-# Converts hex coordinates to euler coordinates
-def hexPt(x, y):
-    return Vector(x + 0.5*y, hr3*y)
+# Converts hex coordinates to cartesian coordinates
+def hex_to_cart(x, y):
+    return Vector(x + y_axis_in_hex.x*y, y_axis_in_hex.y*y)
 
 # Inverts matrix
-def inv(mat):
+def invert_mat(mat):
     det = mat[0]*mat[4] - mat[1]*mat[3]
     return [mat[4]/det, -mat[1]/det, (mat[1]*mat[5]-mat[2]*mat[4])/det, 
             -mat[3]/det, mat[0]/det, (mat[2]*mat[3]-mat[0]*mat[5])/det]
 
 # Multiplies two matrices
-def mul(A, B):
+def mat_mul(A, B):
 	return [A[0]*B[0] + A[1]*B[3], A[0]*B[1] + A[1]*B[4], A[0]*B[2] + A[1]*B[5] + A[2],
 		    A[3]*B[0] + A[4]*B[3], A[3]*B[1] + A[4]*B[4], A[3]*B[2] + A[4]*B[5] + A[5]]
 
 # Adds vectors
-def padd(p, q):
+def vec_add(p, q):
     return Vector(p.x + q.x, p.y + q.y)
 
 # Subtracts vectors
-def psub(p, q):
+def vec_subtract(p, q):
     return Vector(p.x - q.x, p.y - q.y)
 
 # Returns rotation matrix
-def trot(angle):
+def create_rot_mat(angle):
 	c = cos(angle)
 	s = sin(angle)
 	return [c, -s, 0, s, c, 0]
 
 # Returns translation matrix
-def ttrans(tx, ty):
+def create_trans_mat(tx, ty):
 	return [1, 0, tx, 0, 1, ty]
 
 # Returns a matrix that rotates around a point p
-def rotAbout(p, angle):
-	return mul(ttrans(p.x, p.y), mul(trot(angle), ttrans(-p.x, -p.y)))
+def create_rot_mat_around_point(p, angle):
+	return mat_mul(create_trans_mat(p.x, p.y), mat_mul(create_rot_mat(angle), create_trans_mat(-p.x, -p.y)))
 
 # Multiplies a matrix by a vector
-def transPt(M, P):
-	return pt(M[0]*P.x + M[1]*P.y + M[2], M[3]*P.x + M[4]*P.y + M[5])
+def multiply_mat_vec(M, P):
+	return Vector(M[0]*P.x + M[1]*P.y + M[2], M[3]*P.x + M[4]*P.y + M[5])
 
-def matchSeg(p, q):
+def match_segment(p, q):
 	return [q.x - p.x, p.y - q.y, p.x,  q.y - p.y, q.x - p.x, p.y]
 
-def matchTwo(p1, q1, p2, q2):
-	return mul(matchSeg(p2, q2), inv(matchSeg( p1, q1 )))
+# Generate transform matrix that places line segment (p1,q1) on to line segment (p2,q2)
+def match_shapes(p1, q1, p2, q2):
+	return mat_mul(match_segment(p2, q2), invert_mat(match_segment( p1, q1 )))
 
-def intersect(p1, q1, p2, q2):
+def get_intersect_point(p1, q1, p2, q2):
     d = (q2.y - p2.y)*(q1.x - p1.x) - (q2.x - p2.x)*(q1.y - p1.y)
     uA = ((q2.x - p2.x)*(p1.y - p2.y) - (q2.y - p2.y)*(p1.x - p2.x))/d
 
-    return pt(p1.x + uA*(q1.x - p1.x), p1.y + uA*(q1.y - p1.y))
+    return Vector(p1.x + uA*(q1.x - p1.x), p1.y + uA*(q1.y - p1.y))
 
-hat_outline = [hexPt(0, 0), hexPt(-1,-1), hexPt(0,-2), hexPt(2,-2),
-               hexPt(2,-1), hexPt(4,-2), hexPt(5,-1), hexPt(4, 0),
-               hexPt(3, 0), hexPt(2, 2), hexPt(0, 3), hexPt(0, 2),
-               hexPt(-1, 2) ]
+# Outline goes counter-clockwise
+hat_outline = [hex_to_cart(0, 0), hex_to_cart(-1,-1), hex_to_cart(0,-2), hex_to_cart(2,-2),
+               hex_to_cart(2,-1), hex_to_cart(4,-2), hex_to_cart(5,-1), hex_to_cart(4, 0),
+               hex_to_cart(3, 0), hex_to_cart(2, 2), hex_to_cart(0, 3), hex_to_cart(0, 2),
+               hex_to_cart(-1, 2)]

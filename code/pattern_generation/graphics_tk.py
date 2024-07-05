@@ -14,7 +14,7 @@ class EinsteinCanvas(Canvas):
         coordinates = []
         for vec in vertices:
             coordinates.append(vec.x*self.scalar + self.winfo_reqwidth()/2)
-            coordinates.append(-vec.y*self.scalar + self.winfo_reqheight()/2)
+            coordinates.append(vec.y*self.scalar + self.winfo_reqheight()/2)
 
         self.create_polygon(coordinates, fill=fill, width=2, outline="black")
 
@@ -25,7 +25,7 @@ def draw_tiles(tiles, width=500, height=500):
     canvas.set_scalar(20)
 
     for tile in tiles:
-        canvas.draw_polygon(tile[0], fill=tile[1])
+        canvas.draw_polygon(tile[0], fill=tile[1][0])
 
     canvas.pack()
     root.mainloop()
