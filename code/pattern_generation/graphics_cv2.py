@@ -1,11 +1,10 @@
 import cv2
 import numpy as np
 
-from seed_to_coordinate import *
 from geometry import Vector
 
 OUTPUT_IMAGE_DIMENSIONS = Vector(800, 800)
-SCALAR = 70
+SCALAR = 50
 
 def draw_tile(tile, image, offset_coord=Vector(0, 0)):
     fill = tile[1][1]

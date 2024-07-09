@@ -1,3 +1,7 @@
+import numpy as np
+
+from pattern_generator import *
+from graphics_cv2 import *
 from geometry import Vector
 
 # Converts a seed to coordinates so that you can get a unique piece of the pattern for each seed
@@ -41,3 +45,21 @@ def seed_to_coordinate(seed):
         output_coord.y = seed - (start_of_layer + layer*6 + 3)
 
     return output_coord
+
+def seed_to_pattern(seed, output_file_name="output.png"):
+    offset_coordinate = seed_to_coordinate(seed)
+    next_generation()
+    
+    while True:
+        output_image = np.full((OUTPUT_IMAGE_DIMENSIONS.y, OUTPUT_IMAGE_DIMENSIONS.x, 3), 255)
+        for tile in vertices_to_draw:
+            output_image = draw_tile(tile, output_image, offset_coord=offset_coordinate)
+
+        if np.count_nonzero(output_image == 255) <= 9:
+            finished_generating = True
+            cv2.imwrite(output_file_name, output_image)
+            return 0
+        
+        next_generation()
+
+seed_to_pattern(10)

@@ -31,25 +31,25 @@ def vec_add(p, q):
     return Vector(p.x + q.x, p.y + q.y)
 
 # Subtracts vectors
-def vec_subtract(p, q):
+def vec_sub(p, q):
     return Vector(p.x - q.x, p.y - q.y)
 
 # Returns rotation matrix
-def create_rot_mat(angle):
+def get_rot_mat(angle):
 	c = cos(angle)
 	s = sin(angle)
 	return [c, -s, 0, s, c, 0]
 
 # Returns translation matrix
-def create_trans_mat(tx, ty):
+def get_transl_mat(tx, ty):
 	return [1, 0, tx, 0, 1, ty]
 
 # Returns a matrix that rotates around a point p
-def create_rot_mat_around_point(p, angle):
-	return mat_mul(create_trans_mat(p.x, p.y), mat_mul(create_rot_mat(angle), create_trans_mat(-p.x, -p.y)))
+def get_rot_mat_about_point(p, angle):
+	return mat_mul(get_transl_mat(p.x, p.y), mat_mul(get_rot_mat(angle), get_transl_mat(-p.x, -p.y)))
 
 # Multiplies a matrix by a vector
-def multiply_mat_vec(M, P):
+def mat_vec_mul(M, P):
 	return Vector(M[0]*P.x + M[1]*P.y + M[2], M[3]*P.x + M[4]*P.y + M[5])
 
 def match_segment(p, q):
