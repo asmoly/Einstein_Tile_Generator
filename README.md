@@ -1,6 +1,9 @@
 # Einstein Tile Generator
 ![Einstein Pattern](pattern_image.png)
 
+## What it is
+The Einstein Tile was the most significant mathematical discovery of 2022. This tile is an aperiodic monotile that can cover an infinite plane without repeating. However, this doesn’t mean that if you zoom into a specific portion of the pattern, it will be unique, because large portions of the pattern repeat. An aperiodic pattern means that if you move the entire pattern on top of itself, it will never align with itself except for in the center. This  program is a Python implementation of an Einstein tile generator.
+
 ## How to run it
 The files needed to run the pattern generator are `geometry.py` which contains different functions for matrix transformations, `graphics_tk.py` which draws the pattern, `pattern_generator.py` which contains the algorithm for generating the pattern, and `main.py` which runs the program. The only libraries which you need to have installed are "math" which comes preinstalled with python and "tkinter" which can be installed by running:
 
@@ -24,5 +27,7 @@ You can specify the seed to generate at the bottom of the program in the functio
 ## Credits
 Thank you to Mar Gonzalez-Franco, Eric Gonzalez, and Karan Ahuja from Google Reasearch for helping me with this project.
 
+
 My work was based on this paper: [An aperiodic monotile](https://cs.uwaterloo.ca/~csk/hat/) by David Smith, Joseph Samuel Myers, Craig S. Kaplan, and Chaim Goodman-Strauss.
+
 Smith D., Myers J., Kaplan C., & Goodman-Strauss C. (2023). An aperiodic monotile. arXiv preprint arXiv:2303.10798.
