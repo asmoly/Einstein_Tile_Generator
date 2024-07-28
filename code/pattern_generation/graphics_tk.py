@@ -18,11 +18,11 @@ class EinsteinCanvas(Canvas):
 
         self.create_polygon(coordinates, fill=fill, width=2, outline="black")
 
-def draw_tiles(tiles, width=500, height=500):
+def draw_tiles(tiles, width=500, height=500, scalar=20):
     root = Tk()
     canvas = EinsteinCanvas(root, width=width, height=height)
     
-    canvas.set_scalar(30)
+    canvas.set_scalar(scalar)
 
     for tile in tiles:
         canvas.draw_polygon(tile[0], fill=tile[1][0])
