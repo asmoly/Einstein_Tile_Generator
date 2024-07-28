@@ -25,9 +25,9 @@ To run this you need the files `pattern_generator.py`, `geometry.py`, `graphics_
 You can specify the seed to generate at the bottom of the program in the function "seed_to_pattern". The program will output the image as a file in the same directory that it is in.
 
 ## Credits
-Thank you to Mar Gonzalez-Franco, Eric Gonzalez, and Karan Ahuja from Google Reasearch for helping me with this project.
+Thank you to Mar Gonzalez-Franco, Eric Gonzalez, and Karan Ahuja from Google Reasearch for helping me with this project and for their guidance.
 
 
 My work was based on this paper: [An aperiodic monotile](https://cs.uwaterloo.ca/~csk/hat/) by David Smith, Joseph Samuel Myers, Craig S. Kaplan, and Chaim Goodman-Strauss.
 
-Smith D., Myers J., Kaplan C., & Goodman-Strauss C. (2023). An aperiodic monotile. arXiv preprint arXiv:2303.10798.
+Citation: Smith D., Myers J., Kaplan C., & Goodman-Strauss C. (2023). An aperiodic monotile. arXiv preprint arXiv:2303.10798.
