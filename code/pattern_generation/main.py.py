@@ -62,4 +62,4 @@ def seed_to_pattern(seed, output_file_name="output.png"):
         
         next_generation()
 
-seed_to_pattern(10)
+seed_to_pattern(6)

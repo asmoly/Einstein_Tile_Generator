@@ -217,10 +217,10 @@ def construct_metatiles(patch):
     new_T = MetaTile(new_T_outline, patch.width*2)
     new_T.add_child(patch.children[11].T, patch.children[11].geom)
 
-    new_H.recentre()
-    new_P.recentre()
-    new_F.recentre()
-    new_T.recentre()
+    # new_H.recentre()
+    # new_P.recentre()
+    # new_F.recentre()
+    # new_T.recentre()
 
     return [new_H, new_T, new_P, new_F]
 

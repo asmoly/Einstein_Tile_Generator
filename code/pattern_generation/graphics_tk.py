@@ -22,7 +22,7 @@ def draw_tiles(tiles, width=500, height=500):
     root = Tk()
     canvas = EinsteinCanvas(root, width=width, height=height)
     
-    canvas.set_scalar(20)
+    canvas.set_scalar(10)
 
     for tile in tiles:
         canvas.draw_polygon(tile[0], fill=tile[1][0])
