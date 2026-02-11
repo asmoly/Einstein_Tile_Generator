@@ -51,7 +51,7 @@ def seed_to_pattern(seed, output_file_name="output.png"):
     next_generation()
     
     while True:
-        output_image = np.full((OUTPUT_IMAGE_DIMENSIONS.y, OUTPUT_IMAGE_DIMENSIONS.x, 3), 255)
+        output_image = np.full((OUTPUT_IMAGE_DIMENSIONS.y, OUTPUT_IMAGE_DIMENSIONS.x, 3), 255, dtype=np.uint8)
         for tile in vertices_to_draw:
             output_image = draw_tile(tile, output_image, offset_coord=offset_coordinate)
 

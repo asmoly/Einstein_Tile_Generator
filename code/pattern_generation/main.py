@@ -1,7 +1,7 @@
 from pattern_generator import *
 from graphics_tk import *
 
-SCALAR = 30
+SCALAR = 8
 
 while True:
     next_generation()
